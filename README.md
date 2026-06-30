@@ -1,4 +1,4 @@
-# BetterCrunchyroll 
+# Better Crunchyroll 
 
 A Firefox extension that adds additional seetings to the Crunchyroll video player.
 
