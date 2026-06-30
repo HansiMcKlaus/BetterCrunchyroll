@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Better Crunchyroll",
+  "version": "1.0.0",
+  "author": "HansiMcKlaus",
+  "description": "Adds additional settings to the Crunchyroll player",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.crunchyroll.com/*"
+      ],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg",
+    "128": "icons/icon.svg"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Better Crunchyroll",
+    "default_icon": {
+      "16": "icons/icon.svg",
+      "32": "icons/icon.svg"
+    }
+  }
+}

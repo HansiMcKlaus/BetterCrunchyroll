@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 260px;
+  padding: 18px;
+  font-family: system-ui, sans-serif;
+  background: #23252b;
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff640a;
+}
+
+.setting {
+  margin-bottom: 18px;
+  color: #a0a0a8;
+}
+
+.setting > label:not(.toggle) {
+  display: block;
+  margin-bottom: 6px;
+}
+
+input[type="number"] {
+  width: 50%;
+  padding: 6px 8px;
+  border: 1px solid #3a3c44;
+  border-radius: 6px;
+  background: #2e3035;
+  color: #ffffff;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #ff640a;
+}
+
+button {
+  width: 100%;
+  padding: 6px;
+  background: #ff640a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+button:hover {
+  background: #d8560b;
+}
+
+button.error {
+  background: #696969;
+}
+
+.toggle-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  visibility: hidden;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #3a3c44;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  bottom: 3px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle input:checked + .slider {
+  background: #ff640a;
+}
+
+.toggle input:checked + .slider::before {
+  transform: translateX(16px);
+}
+

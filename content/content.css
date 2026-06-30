@@ -1,0 +1,4 @@
+[data-testid="trickplay-container"] {
+  scale: var(--seek-preview-scale, 1) !important;
+  transform-origin: center calc(50% - 16px) !important;
+}

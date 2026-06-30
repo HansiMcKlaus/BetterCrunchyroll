@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Better Crunchyroll</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h2>Better Crunchyroll</h2>
+  <div class="setting">
+    <label for="stepSize">Seek step size (seconds)</label>
+    <input type="number" id="stepSize" min="1" max="30" step="1" placeholder="5">
+  </div>
+  <div class="setting">
+    <label for="seekPreviewScale">Seek preview scale</label>
+    <input type="number" id="seekPreviewScale" min="0.1" max="5" step="0.1" placeholder="1">
+  </div>
+  <div class="setting toggle-setting">
+    <span>Recommendation Carousel</span>
+    <label class="toggle">
+      <input type="checkbox" id="showRecommendationCarousel">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <button id="save">Save</button>
+  <script src="popup.js"></script>
+</body>
+</html>
