@@ -34,7 +34,10 @@
   
   window.addEventListener('keydown', (e) => {
     if (isEditableTarget(e.target)) return
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+
+    const isSeek = e.key === 'ArrowLeft' || e.key === 'ArrowRight'
+    const isFrame = e.key === ',' || e.key === '.'
+    if (!isSeek && !isFrame) return
 
     const video = document.querySelector('video')
     if (!video) return
@@ -44,24 +47,30 @@
     e.stopPropagation()
     e.preventDefault()
 
-    const delta = e.key === 'ArrowLeft' ? -stepSize : stepSize
-    video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + delta))
+    if (isSeek) {
+      const delta = e.key === 'ArrowLeft' ? -stepSize : stepSize
+      video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + delta))
+    } else if (isFrame) {
+      // Assume a Framerate of 24FPS
+      const delta = e.key === ',' ? -(1 / 24) : (1 / 24)
+      video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + delta))
+    }
+  }, true)
+
+  // Open/Exit Fullscreen on double-click
+  window.addEventListener('dblclick', (e) => {
+    if (isEditableTarget(e.target)) return
+    if (e.target.closest('button, a, [role="button"]')) return
+    const fullscreenBtn = document.querySelector('[data-testid="fullscreen-button"]')
+    if (!fullscreenBtn) return
+    e.preventDefault()
+    fullscreenBtn.click()
   }, true)
 
   // Watch for the end-of-episode banner and close it via its own close button
-  function createBannerObserver(watchEpisodeContainer) {
-    return new MutationObserver(() => {
-      if (showRecommendationCarousel) return
-      const banner = watchEpisodeContainer.querySelector('.erc-end-slate-recommendations-carousel')
-      if (banner) banner.querySelector('button[data-t="close-btn"]')?.click()
-    })
-  }
-
-  // Wait for the watch episode container to appear, then attach the banner observer to it
-  new MutationObserver((_, containerObserver) => {
-    const watchEpisodeContainer = document.querySelector('.erc-watch-episode')
-    if (!watchEpisodeContainer) return
-    containerObserver.disconnect()
-    createBannerObserver(watchEpisodeContainer).observe(watchEpisodeContainer, { childList: true })
+  new MutationObserver(() => {
+    if (showRecommendationCarousel) return
+    const closeBtn = document.querySelector('.erc-end-slate-recommendations-carousel button[data-t="close-btn"]')
+    if (closeBtn) closeBtn.click()
   }).observe(document.documentElement, { childList: true, subtree: true })
 })()
